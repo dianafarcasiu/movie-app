@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Pacifico&display=swap");
+
+:root {
+  /* --bg-color-light: #fff; */
+  --bg-color-dark: #262835;
+  --navbar-color-dark: #222831;
+  /* --navbar-color-light: #a43b46; */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif !important;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: var(--bg-color-dark) !important;
+  color: #fff;
+}
+
+/* NAVBAR */
+.navbar {
+  position: sticky !important;
+  top: 0;
+  z-index: 10;
+  background-color: var(--navbar-color-dark);
+  color: #fff;
+}
+.logo {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  /* font-family: "Cedarville Cursive", cursive; */
+}
+.logo i {
+  padding-right: 0.4rem;
+}
+.logo:hover {
+  transform: scale(1.1);
+}
+.navbar-list {
+  list-style-type: none;
+}
+.navbar-list li {
+  cursor: pointer;
+}
+.navbar-list li:hover .underline {
+  width: 100%;
+}
+.dark-light-btn {
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 0.2rem 0.4rem;
+  color: #fff;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+.dark-light-btn:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+/* FOOTER */
+footer {
+  background-color: var(--navbar-color-dark);
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+/*HOMEPAGE */
+.heading {
+  margin: 4rem 0 2rem 2.5rem;
+  color: #fff;
+  font-weight: 800;
+}
+.underline {
+  height: 0.2px;
+  background-color: #fff;
+  width: 0;
+  transition: width 0.5s ease;
+}
+.heading:hover .underline {
+  width: 25%;
+}
+
+/* Movie cards */
+.movie-card {
+  width: 14rem;
+  height: 20rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+.movie-card:hover {
+  transform: scale(1.1);
+  border: 2px solid #fff;
+}
+
+/* .search-bar {
+  width: 25rem;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  border: 0.5px solid black;
+  border: 0;
+  border-radius: 5px;
+  margin-left: 3rem;
+  transition: box-shadow 0.3s ease;
+  background-color: var(--logo-color);
+}
+.search-bar:focus {
+  outline: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+} */
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+  .search-bar {
+    width: 15rem;
+  }
+}
