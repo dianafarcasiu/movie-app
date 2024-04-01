@@ -14,8 +14,7 @@ export default function Slider({ url, options }) {
       async function getSliderMovies() {
         const res = await fetch(url, options);
         const data = await res.json();
-        setSliderMovies(data.results.slice(0, 8));
-        console.log(data.results.slice(0, 5));
+        setSliderMovies(data.results.slice(0, 10));
       }
       getSliderMovies();
     },

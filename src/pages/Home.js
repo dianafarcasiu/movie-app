@@ -1,8 +1,9 @@
 import Navbar from "../containers/Navbar";
 import Slider from "../containers/Slider";
 import Heading from "../components/Heading";
-import CategoryResults from "../containers/CategoryResults";
+import MovieResults from "../containers/MovieResults";
 import Footer from "../containers/Footer";
+import SeriesResults from "../containers/SeriesResults";
 
 export default function Home() {
   const options = {
@@ -17,11 +18,11 @@ export default function Home() {
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
   const topRatedMoviesURL =
     "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
-  const topRatedShowsURL =
+  const topRatedSeriesURL =
     "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1";
   const popularMoviesURL =
     "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
-  const popularShowsURL =
+  const popularSeriesURL =
     "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1";
 
   return (
@@ -31,16 +32,32 @@ export default function Home() {
       <Slider url={sliderMoviesURL} options={options} />
       <div className="container fluid">
         <Heading>Top Rated Movies</Heading>
-        <CategoryResults url={topRatedMoviesURL} options={options} />
+        <MovieResults
+          url={topRatedMoviesURL}
+          options={options}
+          numOfResults={15}
+        />
 
-        <Heading>Top Rated Shows</Heading>
-        <CategoryResults url={topRatedShowsURL} options={options} />
+        <Heading>Top Rated Series</Heading>
+        <SeriesResults
+          url={topRatedSeriesURL}
+          options={options}
+          numOfResults={15}
+        />
 
         <Heading>Popular Movies</Heading>
-        <CategoryResults url={popularMoviesURL} options={options} />
+        <MovieResults
+          url={popularMoviesURL}
+          options={options}
+          numOfResults={15}
+        />
 
-        <Heading>Popular Shows</Heading>
-        <CategoryResults url={popularShowsURL} options={options} />
+        <Heading>Popular Series</Heading>
+        <SeriesResults
+          url={popularSeriesURL}
+          options={options}
+          numOfResults={15}
+        />
       </div>
       <Footer />
     </>

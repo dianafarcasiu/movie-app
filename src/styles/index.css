@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Pacifico&display=swap");
 
+@import url("./cards.css");
+
 :root {
   /* --bg-color-light: #fff; */
   --bg-color-dark: #262835;
@@ -15,7 +17,11 @@ body {
   box-sizing: border-box;
   overflow-x: hidden;
   background-color: var(--bg-color-dark) !important;
-  color: #fff;
+  color: #fff !important;
+}
+a {
+  text-decoration: none !important;
+  color: #fff !important;
 }
 
 /* NAVBAR */
@@ -31,9 +37,11 @@ body {
   transition: transform 0.2s ease;
   /* font-family: "Cedarville Cursive", cursive; */
 }
-.logo i {
-  padding-right: 0.4rem;
+.logo span {
+  font-size: 1.5rem;
+  margin-right: 0.2rem;
 }
+
 .logo:hover {
   transform: scale(1.1);
 }
@@ -42,9 +50,14 @@ body {
 }
 .navbar-list li {
   cursor: pointer;
+  font-size: 0.95rem;
 }
 .navbar-list li:hover .underline {
   width: 100%;
+}
+.fa-solid {
+  padding-right: 0.4rem;
+  font-size: 0.9rem;
 }
 .dark-light-btn {
   background: transparent;
@@ -80,43 +93,85 @@ footer {
   transition: width 0.5s ease;
 }
 .heading:hover .underline {
-  width: 25%;
+  width: 30%;
 }
 
-/* Movie cards */
-.movie-card {
-  width: 14rem;
-  height: 20rem;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
-  transition: transform 0.5s ease;
-  cursor: pointer;
+.results {
+  margin: 2rem 0;
 }
-.movie-card:hover {
-  transform: scale(1.1);
-  border: 2px solid #fff;
+.search-form {
+  margin: 5rem 0 1rem;
+  position: relative;
 }
-
-/* .search-bar {
-  width: 25rem;
-  padding: 0.4rem;
-  font-size: 0.9rem;
-  border: 0.5px solid black;
+.search-bar {
+  width: 100%;
+  padding: 1.5rem 2.5rem;
+  font-size: 1.5rem;
+  font-family: inherit;
   border: 0;
-  border-radius: 5px;
-  margin-left: 3rem;
+  border-radius: 1rem;
+  background-color: var(--navbar-color-dark);
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease;
-  background-color: var(--logo-color);
+  transition: transform 0.3s ease;
+  color: #fff;
 }
 .search-bar:focus {
   outline: 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-} */
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); */
+  background-color: transparent;
+  transform: translateY(-15px);
+}
+.delete-query-btn {
+  position: absolute;
+  right: 3rem;
+  top: 1rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #ccc;
+}
+.delete-query-btn:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
 
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
+  .navbar {
+    font-size: 0.8rem;
+  }
+  .logo {
+    font-size: 0.9rem;
+  }
   .search-bar {
-    width: 15rem;
+    font-size: 0.8rem;
+  }
+  .navbar-page {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .navbar-list {
+    gap: 1rem;
+  }
+  .movie-card,
+  .series-card {
+    width: 10rem;
+    height: 16rem;
+  }
+  .genre-card {
+    width: 8rem;
+    height: 5rem;
+  }
+  .genre-card h4 {
+    font-size: 1rem;
+  }
+  .logo span {
+    font-size: 1.2rem;
+    margin-right: 0.8rem;
+  }
+  .dark-light-btn {
+    display: none;
   }
 }

@@ -1,8 +1,9 @@
+import { NavLink } from "react-router-dom";
+
 export default function Logo() {
   return (
-    <div className="logo fs-4">
-      {/* <i className="fa-solid fa-film"></i> */}
+    <NavLink to="/" className="logo fs-4">
       <span>Cinemania</span>
-    </div>
+    </NavLink>
   );
 }
