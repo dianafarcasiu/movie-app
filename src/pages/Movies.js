@@ -1,7 +1,7 @@
 import Navbar from "../containers/Navbar";
 import Genres from "../containers/Genres";
 import Heading from "../components/Heading";
-import MovieResults from "../containers/MovieResults";
+import Results from "../containers/Results";
 import { useState } from "react";
 import Footer from "../containers/Footer";
 
@@ -33,9 +33,10 @@ export default function Movies() {
       <div className="container fluid">
         <Genres onGenreClick={handleGenreClick} />
         <Heading>{title}</Heading>
-        <MovieResults
+        <Results
           url={url}
           options={options}
+          type="movie"
           results={movies}
           setResults={setMovies}
           numOfResults={20}

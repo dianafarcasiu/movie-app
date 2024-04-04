@@ -1,6 +1,6 @@
-/* Movie cards */
-.movie-card,
-.series-card {
+/* Movie & series cards */
+
+.result-card {
   width: 14rem;
   height: 20rem;
   border-radius: 1rem;
@@ -9,13 +9,59 @@
   transition: transform 0.5s ease;
   cursor: pointer;
 }
-.movie-card:hover,
-.series-card:hover {
+.result-card:hover {
   transform: scale(1.1);
   border: 2px solid #fff;
 }
+.result-card.simple,
+.watchlist-card.simple {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(../imgs/no-image.jpeg) center/cover no-repeat;
+  padding: 0.6rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: #000;
+}
+
+.watchlist-card {
+  width: 13rem;
+  height: 18rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+.watchlist-card:hover {
+  transform: scale(1.1);
+  border: 2px solid #fff;
+}
+.watchlist-item {
+  position: relative;
+}
+.watchlist-item:hover .fav-delete-btn {
+  visibility: visible;
+}
+.fav-delete-btn {
+  position: absolute;
+  left: 5.5rem;
+  bottom: 2rem;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 2rem;
+  visibility: hidden;
+  transition: transform 0.4s ease;
+}
+.fav-delete-btn:hover {
+  transform: scale(1.2);
+  color: #c30010;
+}
 
 /* Genre cards */
+
 .genres-container {
   margin: 5rem 0;
 }

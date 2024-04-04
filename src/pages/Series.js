@@ -2,7 +2,7 @@ import Navbar from "../containers/Navbar";
 import Genres from "../containers/Genres";
 import Heading from "../components/Heading";
 import { useState } from "react";
-import SeriesResults from "../containers/SeriesResults";
+import Results from "../containers/Results";
 import Footer from "../containers/Footer";
 
 export default function Series() {
@@ -34,9 +34,10 @@ export default function Series() {
       <div className="container fluid">
         <Genres onGenreClick={handleGenreClick} />
         <Heading>{title}</Heading>
-        <SeriesResults
+        <Results
           url={url}
           options={options}
+          type="tv"
           results={series}
           setResults={setSeries}
           numOfResults={20}

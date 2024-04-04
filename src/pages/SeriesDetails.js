@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../containers/Navbar";
 import { useEffect, useState } from "react";
-import Heading from "../components/Heading";
 import TrailerButton from "../components/TrailerButton";
-import Footer from "../containers/Footer";
+import Heading from "../components/Heading";
 import Results from "../containers/Results";
+import Footer from "../containers/Footer";
 import CastInfo from "../components/CastInfo";
 import AddToFavoritesButton from "../components/AddToFavoritesButton";
 
-export default function MovieDetails() {
-  const { movieID } = useParams();
-  const [movie, setMovie] = useState([]);
+export default function SeriesDetails() {
+  const { seriesID } = useParams();
+  const [series, setSeries] = useState([]);
   const [genres, setGenres] = useState([]);
   const [hasSimilarTitles, setHasSimilarTitles] = useState(false);
 
@@ -25,18 +25,18 @@ export default function MovieDetails() {
 
   useEffect(
     function () {
-      async function getMovieDetails() {
+      async function getSeriesDetails() {
         const res = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
+          `https://api.themoviedb.org/3/tv/${seriesID}?language=en-US`,
           options
         );
         const data = await res.json();
-        setMovie(data);
+        setSeries(data);
         setGenres(data.genres);
       }
-      getMovieDetails();
+      getSeriesDetails();
     },
-    [movieID]
+    [seriesID]
   );
 
   return (
@@ -45,33 +45,37 @@ export default function MovieDetails() {
       <div
         className="details-container d-flex flex-column justify-content-center"
         style={{
-          background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url(https://image.tmdb.org/t/p/original/${movie?.backdrop_path}) top/cover no-repeat`,
+          background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),url(https://image.tmdb.org/t/p/original/${series.backdrop_path}) top/cover no-repeat`,
         }}
       >
-        <div className="movie-details container fluid">
-          <h1>{movie.title}</h1>
+        <div className="series-details container fluid">
+          <h1>{series.name}</h1>
           <div className="info d-flex flex-wrap gap-2">
-            <small>&bull; {movie.release_date?.split("-")[0]}</small>
-            <small>&bull; {movie.runtime} min</small>
+            <small>&bull; {series.first_air_date?.split("-")[0]}</small>
+            <small>&bull; {series.number_of_seasons} Seasons</small>
+            <small>&bull; {series.number_of_episodes} Episodes</small>
+            {series.episode_run_time?.length !== 0 && (
+              <small>&bull; {series.episode_run_time} min</small>
+            )}
             <small>
               &bull;{" "}
               {genres.map((genre, idx) => (
                 <>
-                  <span>{genre.name}</span>
-                  {idx !== movie.genres.length - 1 && <span>, </span>}
+                  <span key={idx}>{genre.name}</span>
+                  {idx !== series.genres.length - 1 && <span>, </span>}
                 </>
               ))}
             </small>
           </div>
 
-          <h5>{movie.tagline}</h5>
-          <p className="overview">{movie.overview}</p>
+          <h5>{series.tagline}</h5>
+          <p className="overview">{series.overview}</p>
 
-          <div className="movie-btns d-flex gap-4">
-            <TrailerButton type="movie" ID={movieID} options={options} />
-            <AddToFavoritesButton type="movie" result={movie} />
+          <div className="series-btns d-flex gap-4">
+            <TrailerButton type="tv" ID={seriesID} options={options} />
+            <AddToFavoritesButton type="tv" result={series} />
           </div>
-          <CastInfo type="movie" ID={movieID} options={options} />
+          <CastInfo type="tv" ID={seriesID} options={options} />
         </div>
       </div>
 
@@ -82,9 +86,9 @@ export default function MovieDetails() {
       )}
 
       <Results
-        url={`https://api.themoviedb.org/3/movie/${movieID}/similar?language=en-US&page=1`}
+        url={`https://api.themoviedb.org/3/tv/${seriesID}/similar?language=en-US&page=1`}
         options={options}
-        type="movie"
+        type="tv"
         numOfResults={5}
         setHasSimilarTitles={setHasSimilarTitles}
       />

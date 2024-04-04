@@ -1,9 +1,8 @@
 import Navbar from "../containers/Navbar";
 import Slider from "../containers/Slider";
 import Heading from "../components/Heading";
-import MovieResults from "../containers/MovieResults";
+import Results from "../containers/Results";
 import Footer from "../containers/Footer";
-import SeriesResults from "../containers/SeriesResults";
 
 export default function Home() {
   const options = {
@@ -32,30 +31,34 @@ export default function Home() {
       <Slider url={sliderMoviesURL} options={options} />
       <div className="container fluid">
         <Heading>Top Rated Movies</Heading>
-        <MovieResults
+        <Results
           url={topRatedMoviesURL}
           options={options}
+          type="movie"
           numOfResults={15}
         />
 
         <Heading>Top Rated Series</Heading>
-        <SeriesResults
+        <Results
           url={topRatedSeriesURL}
           options={options}
+          type="tv"
           numOfResults={15}
         />
 
         <Heading>Popular Movies</Heading>
-        <MovieResults
+        <Results
           url={popularMoviesURL}
           options={options}
+          type="movie"
           numOfResults={15}
         />
 
         <Heading>Popular Series</Heading>
-        <SeriesResults
+        <Results
           url={popularSeriesURL}
           options={options}
+          type="tv"
           numOfResults={15}
         />
       </div>

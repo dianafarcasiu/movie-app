@@ -2,8 +2,7 @@ import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../containers/Navbar";
 import Heading from "../components/Heading";
-import MovieResults from "../containers/MovieResults";
-import SeriesResults from "../containers/SeriesResults";
+import Results from "../containers/Results";
 
 export default function Search() {
   const [query, setQuery] = useState("");
@@ -35,10 +34,10 @@ export default function Search() {
         />
 
         {query && <Heading>Movie results for "{query}"</Heading>}
-        <MovieResults url={searchMoviesUrl} options={options} />
+        <Results url={searchMoviesUrl} type="movie" options={options} />
 
         {query && <Heading>Series results for "{query}"</Heading>}
-        <SeriesResults url={searchSeriesUrl} options={options} />
+        <Results url={searchSeriesUrl} type="tv" options={options} />
       </div>
     </>
   );

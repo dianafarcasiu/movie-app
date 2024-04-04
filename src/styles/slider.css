@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 .swiper-horizontal:hover {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .slider-text {
