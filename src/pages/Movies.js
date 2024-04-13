@@ -14,17 +14,20 @@ export default function Movies() {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOGNlYmIzNjMwZWZiNzYyMWIyODExZTMxNGM0NDdkZSIsInN1YiI6IjY1ZDM1MmE0MjhkN2ZlMDE3YzM1YTliMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pCl9L7MBmNmGqcOzOxpUpqCcg2kySLoYc-FkygpmaMA",
     },
   };
-  const discoverMoviesURL =
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc";
 
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState("Discover Movies");
-  const [url, setUrl] = useState(discoverMoviesURL);
+  const [url, setUrl] = useState(
+    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=vote_count.desc"
+  );
+  const [page, setPage] = useState(1);
 
   function handleGenreClick(genre) {
-    const genreUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&with_genres=${genre.id}`;
+    const genreUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=vote_count.desc&with_genres=${genre.id}`;
     setUrl(genreUrl);
     setTitle(`Discover ${genre.name} Movies`);
+    setPage(1);
+    setMovies([]);
   }
 
   return (
@@ -39,7 +42,9 @@ export default function Movies() {
           type="movie"
           results={movies}
           setResults={setMovies}
-          numOfResults={20}
+          showMore={true}
+          page={page}
+          setPage={setPage}
         />
       </div>
       <Footer />

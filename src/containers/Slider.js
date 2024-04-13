@@ -1,13 +1,22 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "../styles/slider.css";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { DarkModeContext } from "../App";
 
 export default function Slider({ url, options }) {
   const [sliderMovies, setSliderMovies] = useState([]);
+  const navigate = useNavigate();
+  const { lightModeOn } = useContext(DarkModeContext);
+
+  function handleClick(target) {
+    navigate(`/movie/${target.id}`);
+  }
 
   useEffect(
     function () {
@@ -29,6 +38,7 @@ export default function Slider({ url, options }) {
       navigation
       pagination={{ clickable: true }}
       loop={true}
+      className={`main-swiper ${lightModeOn ? "light" : ""}`}
     >
       {sliderMovies.map((movie) => (
         <SwiperSlide
@@ -38,6 +48,7 @@ export default function Slider({ url, options }) {
           id={movie.id}
           key={movie.id}
           className="d-flex align-items-center"
+          onClick={() => handleClick(movie)}
         >
           <div className="slider-text">
             <h1>{movie.original_title}</h1>

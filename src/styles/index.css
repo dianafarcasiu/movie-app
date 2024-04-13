@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
 
 @import url("./cards.css");
+@import url("./buttons.css");
 
 :root {
-  /* --bg-color-light: #fff; */
+  --bg-color-light: #f0f5f9;
+  --main-color-light: #a43b46;
   --bg-color-dark: #262835;
-  --navbar-color-dark: #222831;
-  /* --navbar-color-light: #a43b46; */
+  --main-color-dark: #1e2128;
 }
 
 body {
@@ -18,27 +19,38 @@ body {
   overflow-x: hidden;
   background-color: var(--bg-color-dark) !important;
   color: #fff !important;
+  transition: background-color 0.3s ease;
+}
+body.light {
+  background-color: var(--bg-color-light) !important;
 }
 a {
   text-decoration: none !important;
   color: #fff !important;
 }
 
-/* NAVBAR */
+/* NAVBAR + FOOTER */
 .navbar {
   position: sticky !important;
   top: 0;
   z-index: 10;
-  background-color: var(--navbar-color-dark);
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
   color: #fff;
+  transition: background-color 0.3s ease;
 }
+.navbar.light {
+  background-color: var(--main-color-light);
+}
+
 .logo {
   cursor: pointer;
   transition: transform 0.2s ease;
-  /* font-family: "Cedarville Cursive", cursive; */
+  padding-right: 0.5rem;
+  font-family: "Dancing Script", cursive;
 }
 .logo span {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-right: 0.2rem;
 }
 
@@ -59,38 +71,57 @@ a {
   padding-right: 0.4rem;
   font-size: 0.9rem;
 }
-.dark-light-btn {
-  background: transparent;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  padding: 0.2rem 0.4rem;
-  color: #fff;
-  margin-left: auto;
-  margin-right: 2rem;
-}
-.dark-light-btn:hover {
-  color: #000;
-  background-color: #fff;
-}
 
-/* FOOTER */
 footer {
-  background-color: var(--navbar-color-dark);
+  background-color: var(--main-color-dark);
   color: #fff;
-  font-size: 0.8rem;
+  padding: 1rem;
+  margin-top: 4rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+footer.light {
+  background-color: var(--main-color-light);
+}
+.footer-logo {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.4rem;
+}
+.footer-underline {
+  background-color: #fff;
+  width: 100%;
+  height: 0.05px;
+}
+.footer-nav {
+  list-style-type: none;
+  margin: 0.4rem 0 0.8rem;
+}
+.footer-nav span:hover {
+  color: #ccc;
+}
+footer small {
+  font-size: 0.7rem;
 }
 
 /*HOMEPAGE */
+
 .heading {
   margin: 4rem 0 2rem 2.5rem;
   color: #fff;
   font-weight: 800;
+  transition: color 0.3s ease;
+}
+.heading.light {
+  color: #000;
 }
 .underline {
-  height: 0.2px;
+  height: 1px;
   background-color: #fff;
   width: 0;
   transition: width 0.5s ease;
+}
+.underline.light {
+  background-color: #000;
 }
 .heading:hover .underline {
   width: 30%;
@@ -99,6 +130,8 @@ footer {
 .results {
   margin: 2rem 0;
 }
+
+/* SEARCHBAR */
 .search-form {
   margin: 5rem 0 1rem;
   position: relative;
@@ -106,15 +139,25 @@ footer {
 .search-bar {
   width: 100%;
   padding: 1.5rem 2.5rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-family: inherit;
   border: 0;
   border-radius: 1rem;
-  background-color: var(--navbar-color-dark);
+  background-color: var(--main-color-dark);
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.3s ease;
-  transition: transform 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease,
+    background-color 0.3s ease;
   color: #fff;
+}
+.search-bar.light {
+  background-color: var(--main-color-light);
+  color: #000;
+}
+.search-bar.light::placeholder {
+  color: var(--bg-color-light);
+}
+.search-bar.light:focus::placeholder {
+  color: #454545;
 }
 .search-bar:focus {
   outline: 0;
@@ -130,9 +173,15 @@ footer {
   font-size: 1.4rem;
   color: #ccc;
 }
+.delete-query-btn.light {
+  color: #000;
+}
 .delete-query-btn:hover {
   transform: scale(1.1);
   color: #fff;
+}
+.delete-query-btn.light:hover {
+  color: #454545;
 }
 
 /* MOVIE & SERIES DETAILS */
@@ -140,7 +189,6 @@ footer {
   height: 85vh;
   box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
 }
-
 .movie-details h1,
 .series-details h1 {
   font-size: 3rem;
@@ -150,41 +198,24 @@ footer {
   margin-bottom: 2rem;
   font-size: 1rem;
 }
-
 .overview {
   width: 50%;
   line-height: 1.8rem;
   margin-top: 1.5rem;
   text-align: justify;
 }
-.movie-btns,
-.series-btns {
-  margin-top: 2.5rem;
-}
-.trailer-btn,
-.fav-btn {
-  background: transparent;
-  color: #fff;
-  padding: 0.5rem 0.7rem;
-  border: 1px solid #fff;
-  border-radius: 0.6rem;
-  transition: background-color 0.4s ease;
-}
-.trailer-btn:hover,
-.fav-btn:hover {
-  background-color: #fff;
-  color: #000;
-}
-.trailer-btn:active,
-.fav-btn:active {
-  outline: 0;
-  transform: scale(0.96);
-}
 .cast-info {
   margin-top: 2.2rem;
 }
 
 /* MEDIA QUERIES */
+
+@media (max-width: 830px) {
+  .dark-light-btn {
+    margin-right: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar {
     font-size: 0.8rem;
@@ -211,8 +242,7 @@ footer {
   .navbar-list {
     gap: 1rem;
   }
-  .movie-card,
-  .series-card {
+  .result-card {
     width: 9rem;
     height: 15rem;
   }
@@ -222,6 +252,10 @@ footer {
   }
   .genre-card h4 {
     font-size: 1rem;
+  }
+  .watchlist-card {
+    width: 11rem;
+    height: 16rem;
   }
   .logo span {
     font-size: 1.2rem;

@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import Navbar from "../containers/Navbar";
 import WatchListCard from "../components/WatchListCard";
 import Heading from "../components/Heading";
+import { useContext } from "react";
+import { DarkModeContext } from "../App";
+import Footer from "../containers/Footer";
 // import Footer from "../containers/Footer";
 
 export default function WatchList() {
   const [favorites, setFavorites] = useState([]);
+  const { lightModeOn } = useContext(DarkModeContext);
 
   useEffect(function () {
     try {
@@ -28,15 +32,19 @@ export default function WatchList() {
   return (
     <>
       <Navbar />
-      <Heading>Watchlist</Heading>
-      <div className="container fluid results d-flex flex-wrap gap-4 justify-content-center">
-        {favorites.length === 0 ? (
-          <>
-            <p>Your watchlist is currently empty.</p>
-            <p>Start adding some titles to your list!</p>
-          </>
-        ) : (
-          favorites.map((favorite) => (
+      <div className="container fluid">
+        <Heading>Watchlist</Heading>
+      </div>
+      {favorites.length === 0 ? (
+        <div className="container fluid text-center">
+          <h6 className={`${lightModeOn ? "text-dark" : ""}`}>
+            Your watchlist is currently empty, start adding some titles to your
+            list!
+          </h6>
+        </div>
+      ) : (
+        <div className="container fluid results d-flex flex-wrap gap-4 justify-content-center">
+          {favorites.map((favorite) => (
             <div className="watchlist-item" key={favorite.id}>
               <Link to={`/${favorite.type}/${favorite.id}`}>
                 <WatchListCard result={favorite} />
@@ -48,9 +56,10 @@ export default function WatchList() {
                 <i className="fa-regular fa-trash-can"></i>
               </button>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
+      {/* <Footer /> */}
     </>
   );
 }

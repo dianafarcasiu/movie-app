@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function NavbarPages() {
   return (
-    <ul className="navbar-list d-flex align-items-center m-0 p-0 gap-md-4 gap-sm-2 gap-xs-2">
+    <ul className="navbar-list d-flex align-items-center m-0 p-0 gap-md-4 gap-sm-4 gap-xs-3">
       <li>
         <NavLink to="/">
           <i className="fa-solid fa-house"></i>

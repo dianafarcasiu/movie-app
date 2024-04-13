@@ -1,0 +1,109 @@
+/* DARK/ LIGHT MODE BTN */
+.dark-light-btn {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+.checkbox {
+  position: absolute;
+  opacity: 0;
+}
+.checkbox-label {
+  position: relative;
+  width: 3rem;
+  height: 1.6rem;
+  background-color: #111;
+  border-radius: 3rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+.checkbox-label.light {
+  background-color: #541f24;
+}
+.fa-solid.fa-moon {
+  color: #f1c40f;
+  font-size: 0.9rem;
+  padding-right: 0;
+}
+.fa-sun {
+  color: #f39c12;
+  font-size: 0.9rem;
+}
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  transition: transform 0.2s linear;
+}
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(21px);
+}
+
+/* MOVIE INFO BTNS */
+.info-btns {
+  margin-top: 2.5rem;
+}
+.trailer-btn,
+.fav-btn {
+  background: transparent;
+  color: #fff;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #fff;
+  border-radius: 0.6rem;
+  transition: background-color 0.4s ease;
+}
+.trailer-btn:hover,
+.fav-btn:hover,
+.show-more-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+.trailer-btn:active,
+.fav-btn:active,
+.show-more-btn:active {
+  outline: 0;
+  transform: scale(0.96);
+}
+
+.show-more-btn {
+  background-color: var(--main-color-dark);
+  color: #fff;
+  border: 0;
+  border-radius: 0.6rem;
+  padding: 0.3rem 0.6rem;
+  transition: background-color 0.4s ease, transform 0.4s ease;
+}
+.show-more-btn.light {
+  background-color: var(--main-color-light);
+}
+.show-more-btn:hover {
+  transform: translateY(-5px);
+}
+.show-more-btn.light:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* WATCHLIST FAV DELETE BTN */
+.fav-delete-btn {
+  position: absolute;
+  left: 5.5rem;
+  bottom: 2rem;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 2rem;
+  visibility: hidden;
+  transition: transform 0.4s ease, visibility 0.4 ease;
+}
+.fav-delete-btn:hover {
+  transform: scale(1.2);
+  color: #c30010;
+}

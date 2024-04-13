@@ -3,6 +3,7 @@ import SearchBar from "../components/SearchBar";
 import Navbar from "../containers/Navbar";
 import Heading from "../components/Heading";
 import Results from "../containers/Results";
+import Footer from "../containers/Footer";
 
 export default function Search() {
   const [query, setQuery] = useState("");
@@ -25,7 +26,7 @@ export default function Search() {
   return (
     <>
       <Navbar />
-      <div className="container fluid">
+      <div className="container fluid min-vh-100">
         <SearchBar
           value={query}
           onChange={handleQueryChange}
@@ -34,11 +35,22 @@ export default function Search() {
         />
 
         {query && <Heading>Movie results for "{query}"</Heading>}
-        <Results url={searchMoviesUrl} type="movie" options={options} />
+        <Results
+          url={searchMoviesUrl}
+          type="movie"
+          options={options}
+          query={query}
+        />
 
         {query && <Heading>Series results for "{query}"</Heading>}
-        <Results url={searchSeriesUrl} type="tv" options={options} />
+        <Results
+          url={searchSeriesUrl}
+          type="tv"
+          options={options}
+          query={query}
+        />
       </div>
+      <Footer />
     </>
   );
 }

@@ -6,7 +6,7 @@ import Heading from "../components/Heading";
 import Results from "../containers/Results";
 import Footer from "../containers/Footer";
 import CastInfo from "../components/CastInfo";
-import AddToFavoritesButton from "../components/AddToFavoritesButton";
+import ToggleFavoritesButton from "../components/ToggleFavoritesButton";
 
 export default function SeriesDetails() {
   const { seriesID } = useParams();
@@ -39,6 +39,17 @@ export default function SeriesDetails() {
     [seriesID]
   );
 
+  useEffect(
+    function () {
+      document.title = `PopcornTime | ${series.name}`;
+
+      return function () {
+        document.title = "PopcornTime";
+      };
+    },
+    [series]
+  );
+
   return (
     <>
       <Navbar />
@@ -51,7 +62,9 @@ export default function SeriesDetails() {
         <div className="series-details container fluid">
           <h1>{series.name}</h1>
           <div className="info d-flex flex-wrap gap-2">
-            <small>&bull; {series.first_air_date?.split("-")[0]}</small>
+            {series.first_air_date && (
+              <small>&bull; {series.first_air_date?.split("-")[0]}</small>
+            )}
             <small>&bull; {series.number_of_seasons} Seasons</small>
             <small>&bull; {series.number_of_episodes} Episodes</small>
             {series.episode_run_time?.length !== 0 && (
@@ -66,14 +79,38 @@ export default function SeriesDetails() {
                 </>
               ))}
             </small>
+            {series.vote_average > 0 && (
+              <small>
+                &bull;{" "}
+                <span
+                  style={{
+                    color:
+                      series.vote_average >= 8
+                        ? "#32CD32"
+                        : series.vote_average > 5.9
+                        ? "#FF9529"
+                        : "#FF4433",
+                  }}
+                >
+                  {series.vote_average?.toFixed(1)}
+                </span>{" "}
+                <i
+                  class="fa-solid fa-star"
+                  style={{
+                    color: "#FDCC0D",
+                    fontSize: "0.8rem",
+                  }}
+                ></i>
+              </small>
+            )}
           </div>
 
           <h5>{series.tagline}</h5>
           <p className="overview">{series.overview}</p>
 
-          <div className="series-btns d-flex gap-4">
+          <div className="info-btns d-flex gap-4">
             <TrailerButton type="tv" ID={seriesID} options={options} />
-            <AddToFavoritesButton type="tv" result={series} />
+            <ToggleFavoritesButton type="tv" result={series} />
           </div>
           <CastInfo type="tv" ID={seriesID} options={options} />
         </div>

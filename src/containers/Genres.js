@@ -1,24 +1,24 @@
 import GenreCard from "../components/GenreCard";
 
 const genres = [
-  { id: 28, name: "Action", background: require("../imgs/action-bg.jpeg") },
+  { id: 28, name: "Action", background: require("../imgs/action-bg2.jpeg") },
   {
     id: 16,
     name: "Animation",
-    background: require("../imgs/animation-bg.png"),
+    background: require("../imgs/animation-bg2.jpeg"),
   },
-  { id: 35, name: "Comedy", background: require("../imgs/comedy-bg.webp") },
+  { id: 35, name: "Comedy", background: require("../imgs/comedy-bg2.webp") },
   {
     id: 80,
     name: "Crime",
-    background: require("../imgs/thriller-bg.jpeg"),
+    background: require("../imgs/crime-bg2.jpeg"),
   },
   {
     id: 99,
     name: "Documentary",
-    background: require("../imgs/documentary-bg2.avif"),
+    background: require("../imgs/documentary-bg.png"),
   },
-  { id: 18, name: "Drama", background: require("../imgs/drama-bg2.webp") },
+  { id: 18, name: "Drama", background: require("../imgs/drama-bg.webp") },
 ];
 
 export default function Genres({ onGenreClick }) {

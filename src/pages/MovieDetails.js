@@ -6,7 +6,7 @@ import TrailerButton from "../components/TrailerButton";
 import Footer from "../containers/Footer";
 import Results from "../containers/Results";
 import CastInfo from "../components/CastInfo";
-import AddToFavoritesButton from "../components/AddToFavoritesButton";
+import ToggleFavoritesButton from "../components/ToggleFavoritesButton";
 
 export default function MovieDetails() {
   const { movieID } = useParams();
@@ -39,6 +39,17 @@ export default function MovieDetails() {
     [movieID]
   );
 
+  useEffect(
+    function () {
+      document.title = `PopcornTime | ${movie.title}`;
+
+      return function () {
+        document.title = "PopcornTime";
+      };
+    },
+    [movie]
+  );
+
   return (
     <>
       <Navbar />
@@ -52,24 +63,48 @@ export default function MovieDetails() {
           <h1>{movie.title}</h1>
           <div className="info d-flex flex-wrap gap-2">
             <small>&bull; {movie.release_date?.split("-")[0]}</small>
-            <small>&bull; {movie.runtime} min</small>
+            {movie.runtime !== 0 && <small>&bull; {movie.runtime} min</small>}
             <small>
               &bull;{" "}
               {genres.map((genre, idx) => (
                 <>
-                  <span>{genre.name}</span>
+                  <span key={idx}>{genre.name}</span>
                   {idx !== movie.genres.length - 1 && <span>, </span>}
                 </>
               ))}
             </small>
+            {movie.vote_average > 0 && (
+              <small>
+                &bull;{" "}
+                <span
+                  style={{
+                    color:
+                      movie.vote_average >= 8
+                        ? "#32CD32"
+                        : movie.vote_average >= 6
+                        ? "#FF9529"
+                        : "#FF4433",
+                  }}
+                >
+                  {movie.vote_average?.toFixed(1)}
+                </span>{" "}
+                <i
+                  class="fa-solid fa-star"
+                  style={{
+                    color: "#FDCC0D",
+                    fontSize: "0.8rem",
+                  }}
+                ></i>
+              </small>
+            )}
           </div>
 
           <h5>{movie.tagline}</h5>
           <p className="overview">{movie.overview}</p>
 
-          <div className="movie-btns d-flex gap-4">
+          <div className="info-btns d-flex gap-4">
             <TrailerButton type="movie" ID={movieID} options={options} />
-            <AddToFavoritesButton type="movie" result={movie} />
+            <ToggleFavoritesButton type="movie" result={movie} />
           </div>
           <CastInfo type="movie" ID={movieID} options={options} />
         </div>
