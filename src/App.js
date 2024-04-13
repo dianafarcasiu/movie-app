@@ -28,7 +28,7 @@ function App() {
 
   return (
     <DarkModeContext.Provider value={{ lightModeOn, toggleLightMode }}>
-      <BrowserRouter>
+      <BrowserRouter basename="/movie-app">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
