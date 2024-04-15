@@ -17,7 +17,6 @@ export default function WatchList() {
       const storedResults =
         JSON.parse(localStorage.getItem("resultsForLS")) || [];
       setFavorites(storedResults);
-      console.log(storedResults);
     } catch (error) {
       console.error(error);
     }

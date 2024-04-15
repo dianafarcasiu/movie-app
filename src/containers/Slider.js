@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
@@ -32,12 +32,13 @@ export default function Slider({ url, options }) {
 
   return (
     <Swiper
-      modules={[Navigation, Pagination]}
+      modules={[Autoplay, Navigation, Pagination]}
       spaceBetween={50}
       slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
       loop={true}
+      autoplay={{ delay: 4000 }}
       className={`main-swiper ${lightModeOn ? "light" : ""}`}
     >
       {sliderMovies.map((movie) => (

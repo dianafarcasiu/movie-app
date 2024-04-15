@@ -210,6 +210,11 @@ footer small {
 
 /* MEDIA QUERIES */
 
+@media (max-width: 991px) {
+  .overview {
+    width: 65%;
+  }
+}
 @media (max-width: 830px) {
   .dark-light-btn {
     margin-right: 0;
@@ -263,5 +268,24 @@ footer small {
   }
   .dark-light-btn {
     display: none;
+  }
+  .details-container {
+    height: 100vh;
+    font-size: 0.85rem;
+  }
+  .movie-details h1,
+  .series-details h1 {
+    font-size: 1.6rem;
+  }
+  .overview {
+    width: 90%;
+    line-height: 1.4rem;
+    margin-top: 1rem;
+  }
+  .info small {
+    font-size: 0.8rem;
+  }
+  .cast-info {
+    margin-top: 1rem;
   }
 }
