@@ -14,6 +14,8 @@ export default function Home() {
     },
   };
 
+  // const options = { method: "GET", headers: { accept: "application/json" } };
+
   return (
     <>
       <Navbar />
@@ -27,40 +29,38 @@ export default function Home() {
       <div className="container fluid">
         <Heading>Top Rated Movies</Heading>
         <Results
-          url={
-            "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
-          }
+          url={"https://api.themoviedb.org/3/movie/top_rated?language=en-US"}
           options={options}
           type="movie"
+          page={1}
           numOfResults={10}
           // style="slider"
         />
 
         <Heading>Top Rated Series</Heading>
         <Results
-          url={
-            "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1"
-          }
+          url={"https://api.themoviedb.org/3/tv/top_rated?language=en-US"}
           options={options}
           type="tv"
+          page={1}
           numOfResults={10}
         />
 
         <Heading>Popular Movies</Heading>
         <Results
-          url={
-            "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
-          }
+          url={"https://api.themoviedb.org/3/movie/popular?language=en-US"}
           options={options}
           type="movie"
+          page={1}
           numOfResults={10}
         />
 
         <Heading>Popular Series</Heading>
         <Results
-          url={"https://api.themoviedb.org/3/tv/popular?language=en-US&page=1"}
+          url={"https://api.themoviedb.org/3/tv/popular?language=en-US"}
           options={options}
           type="tv"
+          page={1}
           numOfResults={10}
         />
       </div>

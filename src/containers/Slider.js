@@ -23,7 +23,7 @@ export default function Slider({ url, options }) {
       async function getSliderMovies() {
         const res = await fetch(url, options);
         const data = await res.json();
-        setSliderMovies(data.results.slice(0, 10));
+        setSliderMovies(data.results?.slice(0, 10));
       }
       getSliderMovies();
     },
@@ -41,7 +41,7 @@ export default function Slider({ url, options }) {
       autoplay={{ delay: 4000 }}
       className={`main-swiper ${lightModeOn ? "light" : ""}`}
     >
-      {sliderMovies.map((movie) => (
+      {sliderMovies?.map((movie) => (
         <SwiperSlide
           style={{
             background: `url(https://image.tmdb.org/t/p/original/${movie?.backdrop_path}) center/cover no-repeat`,

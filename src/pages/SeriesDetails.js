@@ -123,9 +123,10 @@ export default function SeriesDetails() {
       )}
 
       <Results
-        url={`https://api.themoviedb.org/3/tv/${seriesID}/similar?language=en-US&page=1`}
+        url={`https://api.themoviedb.org/3/tv/${seriesID}/similar?language=en-US`}
         options={options}
         type="tv"
+        page={1}
         numOfResults={5}
         setHasSimilarTitles={setHasSimilarTitles}
       />

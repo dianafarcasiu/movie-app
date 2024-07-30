@@ -117,9 +117,10 @@ export default function MovieDetails() {
       )}
 
       <Results
-        url={`https://api.themoviedb.org/3/movie/${movieID}/similar?language=en-US&page=1`}
+        url={`https://api.themoviedb.org/3/movie/${movieID}/similar?language=en-US`}
         options={options}
         type="movie"
+        page={1}
         numOfResults={5}
         setHasSimilarTitles={setHasSimilarTitles}
       />

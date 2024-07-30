@@ -16,8 +16,8 @@ export default function Search() {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOGNlYmIzNjMwZWZiNzYyMWIyODExZTMxNGM0NDdkZSIsInN1YiI6IjY1ZDM1MmE0MjhkN2ZlMDE3YzM1YTliMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pCl9L7MBmNmGqcOzOxpUpqCcg2kySLoYc-FkygpmaMA",
     },
   };
-  const searchMoviesUrl = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
-  const searchSeriesUrl = `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=1`;
+  const searchMoviesUrl = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`;
+  const searchSeriesUrl = `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US`;
 
   function handleQueryChange(e) {
     setQuery(e.target.value);
@@ -40,6 +40,7 @@ export default function Search() {
           type="movie"
           options={options}
           query={query}
+          page={1}
         />
 
         {query && <Heading>Series results for "{query}"</Heading>}
@@ -48,6 +49,7 @@ export default function Search() {
           type="tv"
           options={options}
           query={query}
+          page={1}
         />
       </div>
       <Footer />
