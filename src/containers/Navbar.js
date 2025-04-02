@@ -1,11 +1,10 @@
+import { useTheme } from "../contexts/ThemeContext";
 import DarkLightBtn from "../components/DarkLightBtn";
 import Logo from "../components/Logo";
 import NavbarPages from "./NavbarPages";
-import { DarkModeContext } from "../App";
-import { useContext } from "react";
 
 export default function Navbar() {
-  const { lightModeOn } = useContext(DarkModeContext);
+  const { lightModeOn } = useTheme();
 
   return (
     <div

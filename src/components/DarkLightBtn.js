@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { DarkModeContext } from "../App";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function DarkLightBtn() {
-  const { lightModeOn, toggleLightMode } = useContext(DarkModeContext);
+  const { lightModeOn, toggleLightMode } = useTheme();
 
   return (
     <div className="dark-light-btn">

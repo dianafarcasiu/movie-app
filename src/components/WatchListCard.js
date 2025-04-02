@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { DarkModeContext } from "../App";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function WatchListCard({ result, type }) {
-  const { lightModeOn } = useContext(DarkModeContext);
+  const { lightModeOn } = useTheme();
 
   return result.poster_path ? (
     <div

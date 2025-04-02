@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useContext } from "react";
-import { DarkModeContext } from "../App";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function SearchBar({ value, onChange, query, setQuery }) {
   const [isFocused, setIsFocused] = useState(false);
-  const { lightModeOn } = useContext(DarkModeContext);
+  const { lightModeOn } = useTheme();
 
   return (
     <form className="search-form">

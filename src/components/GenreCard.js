@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useContext } from "react";
-import { DarkModeContext } from "../App";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function GenreCard({ genre, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
-  const { lightModeOn } = useContext(DarkModeContext);
+  const { lightModeOn } = useTheme();
 
   return (
     <div

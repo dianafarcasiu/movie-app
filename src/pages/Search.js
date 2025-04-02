@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMovies } from "../contexts/MoviesContext";
+import { useSeries } from "../contexts/SeriesContext";
+import { useTheme } from "../contexts/ThemeContext";
 import SearchBar from "../components/SearchBar";
-import Navbar from "../containers/Navbar";
 import Heading from "../components/Heading";
 import Results from "../containers/Results";
 import Footer from "../containers/Footer";
+import Spinner from "../components/Spinner";
 
 export default function Search() {
-  const [query, setQuery] = useState("");
+  const { searchedMovies, getSearchedMovies, moviesLoading } = useMovies();
+  const { searchedSeries, getSearchedSeries, seriesLoading } = useSeries();
+  const { lightModeOn } = useTheme();
 
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOGNlYmIzNjMwZWZiNzYyMWIyODExZTMxNGM0NDdkZSIsInN1YiI6IjY1ZDM1MmE0MjhkN2ZlMDE3YzM1YTliMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pCl9L7MBmNmGqcOzOxpUpqCcg2kySLoYc-FkygpmaMA",
-    },
-  };
-  const searchMoviesUrl = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`;
-  const searchSeriesUrl = `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US`;
+  const [query, setQuery] = useState("");
+  const isLoading = moviesLoading || seriesLoading;
+
+  useEffect(() => {
+    getSearchedMovies(query);
+    getSearchedSeries(query);
+  }, [query]);
 
   function handleQueryChange(e) {
     setQuery(e.target.value);
@@ -25,7 +27,6 @@ export default function Search() {
 
   return (
     <>
-      <Navbar />
       <div className="container fluid min-vh-100">
         <SearchBar
           value={query}
@@ -34,23 +35,35 @@ export default function Search() {
           setQuery={setQuery}
         />
 
-        {query && <Heading>Movie results for "{query}"</Heading>}
-        <Results
-          url={searchMoviesUrl}
-          type="movie"
-          options={options}
-          query={query}
-          page={1}
-        />
+        {query && isLoading && <Spinner />}
 
-        {query && <Heading>Series results for "{query}"</Heading>}
-        <Results
-          url={searchSeriesUrl}
-          type="tv"
-          options={options}
-          query={query}
-          page={1}
-        />
+        {query && !isLoading && (
+          <>
+            <Heading>Movie results for "{query}"</Heading>
+
+            {searchedMovies.length > 0 ? (
+              <Results results={searchedMovies} type="movie" />
+            ) : (
+              <p
+                className={`text-center mb-5 ${lightModeOn ? "text-dark" : ""}`}
+              >
+                Sorry, no movie titles found.
+              </p>
+            )}
+
+            <Heading>Series results for "{query}"</Heading>
+
+            {searchedSeries.length > 0 ? (
+              <Results results={searchedSeries} type="tv" />
+            ) : (
+              <p
+                className={`text-center mb-5 ${lightModeOn ? "text-dark" : ""}`}
+              >
+                Sorry, no series titles found.
+              </p>
+            )}
+          </>
+        )}
       </div>
       <Footer />
     </>

@@ -1,40 +1,38 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useMovies } from "../contexts/MoviesContext";
+import { useSeries } from "../contexts/SeriesContext";
 
-export default function TrailerButton({ type, ID, options }) {
-  const [trailerAvailable, setTrailerAvailable] = useState(true);
+export default function TrailerButton({ id, type }) {
+  const { currentMovieTrailers, getMovieTrailers } = useMovies();
+  const { currentSeriesTrailers, getSeriesTrailers } = useSeries();
 
-  async function handleTrailerClick() {
-    try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/${type}/${ID}/videos?language=en-US`,
-        options
-      );
-      if (!res.ok) throw new Error("Failed to fetch trailer data");
+  useEffect(() => {
+    if (type === "movie") getMovieTrailers(id);
+    else if (type === "tv") getSeriesTrailers(id);
+  }, [type, id]);
 
-      const data = await res.json();
-      const trailers = data.results.filter((video) => video.type === "Trailer");
-      const trailerUrl =
-        trailers.length > 0
-          ? `https://www.youtube.com/watch?v=${trailers[0].key}`
-          : null;
+  const trailers =
+    type === "movie" ? currentMovieTrailers : currentSeriesTrailers;
 
-      if (trailerUrl) window.open(trailerUrl, "_blank");
-      else {
-        console.error("No trailer found for this movie");
-        setTrailerAvailable(false);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  function handleTrailerClick() {
+    const trailerUrl =
+      trailers.length > 0
+        ? `https://www.youtube.com/watch?v=${trailers[0].key}`
+        : null;
+
+    if (trailerUrl) window.open(trailerUrl, "_blank");
   }
 
-  return trailerAvailable ? (
-    <button className="trailer-btn" onClick={handleTrailerClick}>
-      <i className="fa-brands fa-youtube"></i> <span>Watch trailer</span>
-    </button>
-  ) : (
-    <button className="trailer-btn" disabled>
-      <span>No trailer available</span>
+  return (
+    <button
+      className="trailer-btn"
+      onClick={handleTrailerClick}
+      disabled={!trailers || trailers.length === 0}
+    >
+      <i className="fa-brands fa-youtube"></i>{" "}
+      <span>
+        {trailers.length > 0 ? "Watch trailer" : "No trailer available"}
+      </span>
     </button>
   );
 }

@@ -16,7 +16,7 @@ const genres = [
   {
     id: 99,
     name: "Documentary",
-    background: require("../imgs/documentary-bg.png"),
+    background: require("../imgs/documentary-bg.avif"),
   },
   { id: 18, name: "Drama", background: require("../imgs/drama-bg.webp") },
 ];

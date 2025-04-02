@@ -1,54 +1,56 @@
-import Navbar from "../containers/Navbar";
+import { useEffect, useState } from "react";
+import { useSeries } from "../contexts/SeriesContext";
 import Genres from "../containers/Genres";
 import Heading from "../components/Heading";
-import { useState } from "react";
 import Results from "../containers/Results";
 import Footer from "../containers/Footer";
+import ShowMoreBtn from "../components/ShowMoreBtn";
+import Spinner from "../components/Spinner";
 
 export default function Series() {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOGNlYmIzNjMwZWZiNzYyMWIyODExZTMxNGM0NDdkZSIsInN1YiI6IjY1ZDM1MmE0MjhkN2ZlMDE3YzM1YTliMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pCl9L7MBmNmGqcOzOxpUpqCcg2kySLoYc-FkygpmaMA",
-    },
-  };
+  const {
+    discoverSeries,
+    getDiscoverSeries,
+    getSeriesByGenre,
+    clearSeries,
+    seriesLoading,
+  } = useSeries();
 
-  const [series, setSeries] = useState([]);
   const [title, setTitle] = useState("Discover Series");
-  const [url, setUrl] = useState(
-    "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&sort_by=vote_count.desc"
-  );
   const [page, setPage] = useState(1);
+  const [genreId, setGenreId] = useState(null);
+
+  useEffect(() => {
+    if (genreId === null) getDiscoverSeries(page);
+    else getSeriesByGenre(genreId, page);
+  }, [genreId, page]);
 
   function handleGenreClick(genre) {
     let genreId = genre.name === "Action" ? 10759 : genre.id;
-    const genreUrl = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&sort_by=vote_count.desc&with_genres=${genreId}`;
-    setUrl(genreUrl);
-
+    setGenreId(genreId);
     setTitle(`Discover ${genre.name} Series`);
     setPage(1);
-    setSeries([]);
+    clearSeries();
   }
 
   return (
     <>
-      <Navbar />
       <div className="container fluid">
         <Genres onGenreClick={handleGenreClick} />
         <Heading>{title}</Heading>
-        <Results
-          url={url}
-          options={options}
-          type="tv"
-          results={series}
-          setResults={setSeries}
-          numOfResults={20}
-          showMore={true}
-          page={page}
-          setPage={setPage}
-        />
+
+        {seriesLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <Results
+              type="tv"
+              results={discoverSeries}
+              fetchAction={() => getDiscoverSeries()}
+            />
+            <ShowMoreBtn setPage={setPage} />
+          </>
+        )}
       </div>
 
       <Footer />

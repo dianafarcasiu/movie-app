@@ -1,34 +1,26 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMovies } from "../contexts/MoviesContext";
+import { useTheme } from "../contexts/ThemeContext";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "../styles/slider.css";
-import { useContext } from "react";
-import { DarkModeContext } from "../App";
 
-export default function Slider({ url, options }) {
-  const [sliderMovies, setSliderMovies] = useState([]);
+export default function Slider() {
+  const { sliderMovies, getSliderMovies } = useMovies();
+  const { lightModeOn } = useTheme();
   const navigate = useNavigate();
-  const { lightModeOn } = useContext(DarkModeContext);
 
   function handleClick(target) {
     navigate(`/movie/${target.id}`);
   }
 
-  useEffect(
-    function () {
-      async function getSliderMovies() {
-        const res = await fetch(url, options);
-        const data = await res.json();
-        setSliderMovies(data.results?.slice(0, 10));
-      }
-      getSliderMovies();
-    },
-    [url, options]
-  );
+  useEffect(() => {
+    getSliderMovies();
+  }, []);
 
   return (
     <Swiper

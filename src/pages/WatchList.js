@@ -1,36 +1,15 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../containers/Navbar";
+import { useTheme } from "../contexts/ThemeContext";
+import { useFavorites } from "../contexts/FavoritesContext";
 import WatchListCard from "../components/WatchListCard";
 import Heading from "../components/Heading";
-import { useContext } from "react";
-import { DarkModeContext } from "../App";
-import Footer from "../containers/Footer";
-// import Footer from "../containers/Footer";
 
 export default function WatchList() {
-  const [favorites, setFavorites] = useState([]);
-  const { lightModeOn } = useContext(DarkModeContext);
-
-  useEffect(function () {
-    try {
-      const storedResults =
-        JSON.parse(localStorage.getItem("resultsForLS")) || [];
-      setFavorites(storedResults);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  function handleDeleteFavorite(id) {
-    const updatedFavorites = favorites.filter((favorite) => favorite.id !== id);
-    setFavorites(updatedFavorites);
-    localStorage.setItem("resultsForLS", JSON.stringify(updatedFavorites));
-  }
+  const { favorites, deleteFavorite } = useFavorites();
+  const { lightModeOn } = useTheme();
 
   return (
     <>
-      <Navbar />
       <div className="container fluid">
         <Heading>Watchlist</Heading>
       </div>
@@ -50,7 +29,7 @@ export default function WatchList() {
               </Link>
               <button
                 className="fav-delete-btn"
-                onClick={() => handleDeleteFavorite(favorite.id)}
+                onClick={() => deleteFavorite(favorite)}
               >
                 <i className="fa-regular fa-trash-can"></i>
               </button>
@@ -58,7 +37,6 @@ export default function WatchList() {
           ))}
         </div>
       )}
-      {/* <Footer /> */}
     </>
   );
 }

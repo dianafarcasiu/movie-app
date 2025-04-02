@@ -208,6 +208,31 @@ footer small {
   margin-top: 2.2rem;
 }
 
+/* SPINNER */
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+}
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+.spinner.light {
+  border: 4px solid #a43b46;
+  border-top-color: transparent;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 991px) {
