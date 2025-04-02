@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/movie-app/static/css/main.64226335.css",
-    "main.js": "/movie-app/static/js/main.e5fae5fd.js",
+    "main.css": "/movie-app/static/css/main.42aca705.css",
+    "main.js": "/movie-app/static/js/main.31091b28.js",
     "static/media/action-bg2.jpeg": "/movie-app/static/media/action-bg2.d59a1496f1d0fe51c0b0.jpeg",
     "static/media/animation-bg2.jpeg": "/movie-app/static/media/animation-bg2.85c98655011da6e71b01.jpeg",
     "static/media/crime-bg2.jpeg": "/movie-app/static/media/crime-bg2.7ea5952ce6c7313593f1.jpeg",
@@ -9,11 +9,11 @@
     "static/media/drama-bg.webp": "/movie-app/static/media/drama-bg.1a244484a14653d6a900.webp",
     "static/media/comedy-bg2.webp": "/movie-app/static/media/comedy-bg2.f0400c453bcc8c500576.webp",
     "index.html": "/movie-app/index.html",
-    "main.64226335.css.map": "/movie-app/static/css/main.64226335.css.map",
-    "main.e5fae5fd.js.map": "/movie-app/static/js/main.e5fae5fd.js.map"
+    "main.42aca705.css.map": "/movie-app/static/css/main.42aca705.css.map",
+    "main.31091b28.js.map": "/movie-app/static/js/main.31091b28.js.map"
   },
   "entrypoints": [
-    "static/css/main.64226335.css",
-    "static/js/main.e5fae5fd.js"
+    "static/css/main.42aca705.css",
+    "static/js/main.31091b28.js"
   ]
 }
