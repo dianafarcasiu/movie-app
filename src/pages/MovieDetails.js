@@ -26,15 +26,14 @@ export default function MovieDetails() {
     }
   }, [movieId]);
 
-  useEffect(
-    function () {
-      document.title = `PopcornTime | ${currentMovie.title}`;
-      return function () {
-        document.title = "PopcornTime";
-      };
-    },
-    [currentMovie]
-  );
+  useEffect(() => {
+    document.title = currentMovie?.title
+      ? `PopcornTime | ${currentMovie.title}`
+      : "PopcornTime";
+    return function () {
+      document.title = "PopcornTime";
+    };
+  }, [currentMovie]);
 
   if (currentMovieLoading) return <Spinner />;
 

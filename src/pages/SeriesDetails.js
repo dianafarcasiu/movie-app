@@ -24,16 +24,15 @@ export default function SeriesDetails() {
     getSimilarSeries(seriesId);
   }, [seriesId]);
 
-  useEffect(
-    function () {
-      document.title = `PopcornTime | ${currentSeries.name}`;
+  useEffect(() => {
+    document.title = currentSeries?.name
+      ? `PopcornTime | ${currentSeries.name}`
+      : "PopcornTime";
 
-      return function () {
-        document.title = "PopcornTime";
-      };
-    },
-    [currentSeries]
-  );
+    return function () {
+      document.title = "PopcornTime";
+    };
+  }, [currentSeries]);
 
   if (currentSeriesLoading) return <Spinner />;
 
